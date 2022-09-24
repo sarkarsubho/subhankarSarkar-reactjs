@@ -1,5 +1,7 @@
 
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { Cart } from "../components/Cart";
 import { useAppDispatch, useAppSelector } from "../store/hooks"; 
  import { fetchProduct } from "../store/products/productSlice"; 
 export type IproductItemsProps ={
@@ -23,10 +25,9 @@ export const Home = () => {
   return <div>
 
     {Products.map((e:IproductItemsProps)=>{
-        return <div>
-            <img src={e.avatar} alt="img"></img>
-            <p>{e.name}</p>
-        </div>
+        return <Link to={`/product/${e._id}`} key={e._id}>
+          <Cart item={e}></Cart>
+        </Link> 
     })}
   </div>;
 };
