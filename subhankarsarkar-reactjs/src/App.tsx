@@ -2,12 +2,14 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { Details } from "./pages/Details";
+import { CreateNewUser } from "./pages/CreateNewUser";
 function App() {
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<Home></Home>}></Route>
         <Route path="/product/:id" element={<Details></Details>}></Route>
+        <Route path={"/createnew"} element={<CreateNewUser></CreateNewUser>}></Route>
       </Routes>
     </div>
   );
