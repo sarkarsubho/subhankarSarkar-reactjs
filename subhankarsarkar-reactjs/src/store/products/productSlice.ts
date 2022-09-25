@@ -1,5 +1,5 @@
 import {
-  AnyAction,
+ 
   createAsyncThunk,
   createSlice,
   PayloadAction,
@@ -14,6 +14,15 @@ type IproductItemsProps ={
   name: string;
   price: number;
   _id: string;
+}
+export interface IcreateItem {
+  avatar: string;
+  category: string;
+  description: string;
+  developerEmail: string;
+  name: string;
+  price: number;
+  
 }
 
 type InitialState ={
@@ -32,6 +41,7 @@ const initialState : InitialState= {
  
   status: "ok", 
   products:[],
+  
 }
 
 
@@ -40,7 +50,9 @@ const initialState : InitialState= {
 const productSlice = createSlice({
   name: "product",
   initialState,
-  reducers: {},
+  reducers: {
+
+  },
   extraReducers: (builder) => {
     builder
 
@@ -77,4 +89,25 @@ export const fetchProduct = createAsyncThunk("product/fetch", () => {
     });
   
 });
+
+export const createProduct = createAsyncThunk("product/create", (data:{}) => {
+  let config = {
+    
+    headers: {
+      "Content-Type":"application/json",
+      Authorization:
+        "Bearer " +
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhcmthcnNhYnlAZ21haWwuY29tIiwiZ2l0aHViIjoiaHR0cHM6Ly9naXRodWIuY29tL3NhcmthcnN1YmhvIiwiaWF0IjoxNjYzOTk2NzQ2LCJleHAiOjE2NjQ0Mjg3NDZ9.YDCqLKwlPW82FoYghm2USeZR9dI-Todwle6AE3Bt7do",
+    },
+  };
+  let body=JSON.stringify(data)
+  return axios
+    .post("https://upayments-studycase-api.herokuapp.com/api/products",body,config)
+    .then((res) => {
+      console.log(res.data);
+      return res.data.products;
+    });
+  
+});
+
 export default productSlice.reducer
