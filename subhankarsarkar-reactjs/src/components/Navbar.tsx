@@ -2,22 +2,25 @@ import React, { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { IcategoryProps } from "../store/categories/categoriSlice";
 import { useAppSelector } from "../store/hooks";
-
+export type IparamsProps = {
+  category?: string;
+};
 export const Navbar = () => {
   const Categories = useAppSelector((state) => state.categori.categories);
   const [searchParams, setSearchParams] = useSearchParams();
 
   const urlCategory = searchParams.get("category");
   const [category, setCategory] = useState(urlCategory || "all");
+
   //   let currentCategory = "all";
 
-  const handleCategory = (val) => {
+  const handleCategory = (val: any) => {
     console.log(val);
     setCategory(val);
   };
   useEffect(() => {
-    let params = {};
-    params.category = category;
+    let params: IparamsProps = {};
+    params.category = `${category}`;
     setSearchParams(params);
   }, [category]);
   return (

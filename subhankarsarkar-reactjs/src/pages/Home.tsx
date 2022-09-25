@@ -3,6 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import { Cart } from "../components/Cart";
 import { Navbar } from "../components/Navbar";
 
+
 import {
   fetchCategory,
   IcategoryProps,
