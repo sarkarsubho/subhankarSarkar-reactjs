@@ -22,7 +22,7 @@ export const Details = () => {
     
   },[id,Products])
 
-  return <div>Details
+  return <div className="w-80 m-auto mt-10 text-center font-medium text-xl">Details
     {
       product && <Cart item={product}></Cart>
     }

@@ -32,7 +32,7 @@ export const Navbar = () => {
       />
       <div className="flex gap-6 justify-center">
         <p
-          className={category === "all" ? "text-xl text-red-500":"text-xl"}
+          className={category === "all" ? "text-xl text-red-500 cursor-pointer":"text-xl cursor-pointer"}
           onClick={() => handleCategory("all")}
         >
           All
@@ -42,7 +42,7 @@ export const Navbar = () => {
             <div
               key={categori._id}
               onClick={() => handleCategory(categori.name)}
-              className={""}>
+              className={"cursor-pointer"} >
               <p
                 className={categori.name === category ? "text-xl text-red-500":"text-xl"}
               >
@@ -52,6 +52,11 @@ export const Navbar = () => {
           );
         })}
       </div>
+      <Link to="/favorites">
+        <button className="bg-red-900 text-white text-xl p-2 rounded-lg active:opacity-70">
+          view Favorites
+        </button>
+      </Link>
       <Link to="/createnew">
         <button className="bg-red-900 text-white text-xl p-2 rounded-lg active:opacity-70">
           Add New

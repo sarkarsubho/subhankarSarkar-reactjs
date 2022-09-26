@@ -53,6 +53,14 @@ const productSlice = createSlice({
   initialState,
   reducers: {
     addToFavorite : (state,action:PayloadAction<IproductItemsProps>)=>{
+      let flag = state.favorites.find((e:IproductItemsProps)=>
+        action.payload._id === e._id
+      )
+      if(flag){
+        alert("item is already added")
+        return;
+      }
+      alert("Item is added to Favorite")
        state.favorites.push(action.payload);
        localStorage.setItem("favorites",JSON.stringify(state.favorites))
     },
