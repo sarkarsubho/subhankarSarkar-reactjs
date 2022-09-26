@@ -32,7 +32,7 @@ export const Navbar = () => {
       />
       <div className="flex gap-6 justify-center">
         <p
-          className={`text-xl text-${category === "all" ? "red" : "white"}-500`}
+          className={category === "all" ? "text-xl text-red-500":"text-xl"}
           onClick={() => handleCategory("all")}
         >
           All
@@ -42,11 +42,9 @@ export const Navbar = () => {
             <div
               key={categori._id}
               onClick={() => handleCategory(categori.name)}
-            >
+              className={""}>
               <p
-                className={`text-xl text-${
-                  categori.name === category ? "red" : "white"
-                }-500`}
+                className={categori.name === category ? "text-xl text-red-500":"text-xl"}
               >
                 {categori.name}
               </p>

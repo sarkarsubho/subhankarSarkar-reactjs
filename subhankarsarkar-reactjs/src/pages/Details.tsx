@@ -7,6 +7,7 @@ import { IproductItemsProps } from "./Home";
  
 export const Details = () => {
   const Products = useAppSelector(state=>state.app.products);
+  
   const [product,setProduct]=useState<IproductItemsProps>()
   const {id}=useParams();
 

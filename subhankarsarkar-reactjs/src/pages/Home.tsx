@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import {  useSearchParams } from "react-router-dom";
 import { Cart } from "../components/Cart";
 import { Navbar } from "../components/Navbar";
 
-
 import {
   fetchCategory,
-  IcategoryProps,
+  
 } from "../store/categories/categoriSlice";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { fetchProduct } from "../store/products/productSlice";
+import { fetchProduct, removeProduct } from "../store/products/productSlice";
 export type IproductItemsProps = {
   avatar: string;
   category: string;
@@ -24,7 +23,7 @@ export const Home = () => {
   const [searchParams] = useSearchParams();
   const [data, setdata] = useState(Products);
   let categoty = searchParams.get("category");
-  const dispach = useAppDispatch();
+  const dispatch = useAppDispatch();
   console.log("category from home ", categoty);
 
   useEffect(() => {
@@ -37,9 +36,9 @@ export const Home = () => {
   }, [categoty, Products]);
 
   useEffect(() => {
-    dispach(fetchProduct());
-    dispach(fetchCategory());
-  }, [dispach]);
+    dispatch(fetchProduct());
+    dispatch(fetchCategory());
+  }, [dispatch]);
 
   return (
     <div>
@@ -47,9 +46,13 @@ export const Home = () => {
       <div className="grid grid-cols-4 gap-6  mx-auto p-10 text">
         {data.map((e: IproductItemsProps) => {
           return (
-            <Link to={`/product/${e._id}`} key={e._id}>
-              <Cart item={e}></Cart>
-            </Link>
+            <div key={e._id}>
+             
+               <Cart item={e}></Cart>
+              <button className="bg-red-900 w-full text-white text-xl p-2 rounded-lg rounded-t-none active:opacity-70" onClick={()=>{dispatch(removeProduct(e._id))}}>
+                remove
+              </button>
+            </div>
           );
         })}
       </div>

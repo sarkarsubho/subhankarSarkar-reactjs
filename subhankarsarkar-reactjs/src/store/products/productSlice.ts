@@ -26,8 +26,9 @@ export interface IcreateItem {
 }
 
 type InitialState ={
-  status:string
-  products:IproductItemsProps[]
+  status:string;
+  products:IproductItemsProps[];
+  favorites:IproductItemsProps[];
 }
 
 
@@ -41,7 +42,7 @@ const initialState : InitialState= {
  
   status: "ok", 
   products:[],
-  
+  favorites:JSON.parse(`${localStorage.getItem("favorites")}`) ||[]
 }
 
 
@@ -51,7 +52,13 @@ const productSlice = createSlice({
   name: "product",
   initialState,
   reducers: {
-
+    addToFavorite : (state,action:PayloadAction<IproductItemsProps>)=>{
+       state.favorites.push(action.payload);
+       localStorage.setItem("favorites",JSON.stringify(state.favorites))
+    },
+    removeProduct:(state,action:PayloadAction<string>)=>{
+      state.products=state.products.filter(({_id})=>_id !== action.payload);
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -69,7 +76,7 @@ const productSlice = createSlice({
   },
 });
 
-// export const {} = productSlice.actions;
+
 
 
 
@@ -109,5 +116,5 @@ export const createProduct = createAsyncThunk("product/create", (data:{}) => {
     });
   
 });
-
+export const {addToFavorite,removeProduct} =productSlice.actions
 export default productSlice.reducer
