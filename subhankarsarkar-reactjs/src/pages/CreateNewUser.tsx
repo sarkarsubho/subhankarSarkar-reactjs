@@ -31,9 +31,9 @@ export const CreateNewUser = () => {
         className="bg-red-200 w-96 flex flex-col w-92 p-10 pt-0 justify-center m-auto rounded-lg"
         onSubmit={(e) => handleSubmit(e)}
       >
-        <h1 className="fontSize-xl font-serif text-3xl"> Create New User</h1>
+        <h1 className="fontSize-xl font-serif text-3xl"> Create New Product</h1>
         <div className="">
-          <legend className="text-left text-lg mt-2">Name</legend>
+          <legend className="text-left text-lg mt-2">Product Name</legend>
           <input
             type="text"
             name="name"
@@ -107,7 +107,7 @@ export const CreateNewUser = () => {
           />
         </div>
         <input
-          className="cursor-pointer border-2 border-cyan-500 mt-6 bg-cyan-400 p-1 rounded-lg text-white font-semibold text-lg"
+          className="cursor-pointer border-2 border-cyan-500 mt-6 bg-cyan-400 hover:bg-green-500 p-1 rounded-lg text-white font-semibold text-lg"
           type={"submit"}
         ></input>
       </form>
