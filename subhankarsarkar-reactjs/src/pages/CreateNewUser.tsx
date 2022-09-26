@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { useAppDispatch } from "../store/hooks";
 import { createProduct } from "../store/products/productSlice";
 // import { IcreateItem } from "../store/products/productSlice";
@@ -111,6 +112,11 @@ export const CreateNewUser = () => {
           type={"submit"}
         ></input>
       </form>
+      <Link to="/">
+        <button className="bg-teal-600 text-white text-xl p-2 rounded-lg active:opacity-70">
+          {" < Back to Home"}
+        </button>
+      </Link>
     </div>
   );
 };
