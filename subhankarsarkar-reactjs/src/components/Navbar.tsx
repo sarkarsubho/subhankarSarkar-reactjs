@@ -22,7 +22,7 @@ export const Navbar = () => {
     let params: IparamsProps = {};
     params.category = `${category}`;
     setSearchParams(params);
-  }, [category]);
+  }, [category,setSearchParams]);
   return (
     <div className="flex p-4 justify-between shadow-xl">
       <img
@@ -32,7 +32,11 @@ export const Navbar = () => {
       />
       <div className="flex gap-6 justify-center">
         <p
-          className={category === "all" ? "text-xl text-red-500 cursor-pointer":"text-xl cursor-pointer"}
+          className={
+            category === "all"
+              ? "text-xl text-red-500 cursor-pointer"
+              : "text-xl cursor-pointer"
+          }
           onClick={() => handleCategory("all")}
         >
           All
@@ -42,9 +46,14 @@ export const Navbar = () => {
             <div
               key={categori._id}
               onClick={() => handleCategory(categori.name)}
-              className={"cursor-pointer"} >
+              className={"cursor-pointer"}
+            >
               <p
-                className={categori.name === category ? "text-xl text-red-500":"text-xl"}
+                className={
+                  categori.name === category
+                    ? "text-xl text-red-500"
+                    : "text-xl"
+                }
               >
                 {categori.name}
               </p>
@@ -52,16 +61,18 @@ export const Navbar = () => {
           );
         })}
       </div>
-      <Link to="/favorites">
-        <button className="bg-red-900 text-white text-xl p-2 rounded-lg active:opacity-70">
-          view Favorites
-        </button>
-      </Link>
-      <Link to="/createnew">
-        <button className="bg-red-900 text-white text-xl p-2 rounded-lg active:opacity-70">
-          Add New
-        </button>
-      </Link>
+      <div className="flex gap-4">
+        <Link to="/favorites">
+          <button className="bg-red-900 text-white text-xl p-2 rounded-lg active:opacity-70">
+            view Favorites
+          </button>
+        </Link>
+        <Link to="/createnew">
+          <button className="bg-red-900 text-white text-xl p-2 rounded-lg active:opacity-70">
+            Add New
+          </button>
+        </Link>
+      </div>
     </div>
   );
 };

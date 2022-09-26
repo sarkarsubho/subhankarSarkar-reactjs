@@ -2,7 +2,6 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { Statues } from "../products/productSlice";
 
-
 export type IcategoryProps = {
   createdAt: string;
   name: string;
@@ -11,13 +10,12 @@ export type IcategoryProps = {
   _id: string;
 };
 
-type IinitialState={
-    stateus:string;
-    categories:IcategoryProps[]
-}
+type IinitialState = {
+  stateus: string;
+  categories: IcategoryProps[];
+};
 
-
-const initialState :IinitialState = {
+const initialState: IinitialState = {
   stateus: "ok",
   categories: [],
 };
@@ -26,18 +24,21 @@ const categoriSlice = createSlice({
   name: "categori",
   initialState,
   reducers: {},
-  extraReducers: (builder)=>{
-   builder
-   .addCase(fetchCategory.pending,(state,action)=>{
-    state.stateus=Statues.LOADING
-   })
-   .addCase(fetchCategory.fulfilled,(state,action:PayloadAction<IcategoryProps[]>)=>{
-     state.categories=action.payload;
-     state.stateus=Statues.IDEL;
-   })
-   .addCase(fetchCategory.rejected,(state,action)=>{
-    state.stateus=Statues.ERROR;
-   })
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchCategory.pending, (state, action) => {
+        state.stateus = Statues.LOADING;
+      })
+      .addCase(
+        fetchCategory.fulfilled,
+        (state, action: PayloadAction<IcategoryProps[]>) => {
+          state.categories = action.payload;
+          state.stateus = Statues.IDEL;
+        }
+      )
+      .addCase(fetchCategory.rejected, (state, action) => {
+        state.stateus = Statues.ERROR;
+      });
   },
 });
 
@@ -59,6 +60,6 @@ export const fetchCategory = createAsyncThunk("category/fetch", () => {
     )
     .then((res) => {
       console.log(res.data);
-      return res.data.categories
+      return res.data.categories;
     });
 });

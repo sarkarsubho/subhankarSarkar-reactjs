@@ -23,20 +23,18 @@ export const Cart = ({ item }: { item: IproductItemsProps }) => {
           alt="favorite icon"
         ></img>
       </div>
-      <Link to={`/product/${item._id}`} >
-              
-      
-      <img
-        className="h-96 w-full rounded-t-xl m-auto inline"
-        src={item.avatar}
-        alt="img"
-      ></img>
-      <div className="bg-slate-200 h-auto rounded-xl rounded-b-none pl-3 pt-3">
-        <p className="font-bold">{item.name}</p>
+      <Link to={`/product/${item._id}`}>
+        <img
+          className="h-96 w-full rounded-t-xl m-auto inline"
+          src={item.avatar}
+          alt="img"
+        ></img>
+        <div className="bg-slate-200 h-auto rounded-xl rounded-b-none pl-3 pt-3">
+          <p className="font-bold">{item.name}</p>
 
-        <p className="">{item.description}</p>
-        <h1> Price:- ₹ {item.price}</h1>
-      </div>
+          <p className="">{item.description}</p>
+          <h1> Price:- ₹ {item.price}</h1>
+        </div>
       </Link>
     </div>
   );

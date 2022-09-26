@@ -1,12 +1,9 @@
 import { useEffect, useState } from "react";
-import {  useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { Cart } from "../components/Cart";
 import { Navbar } from "../components/Navbar";
 
-import {
-  fetchCategory,
-  
-} from "../store/categories/categoriSlice";
+import { fetchCategory } from "../store/categories/categoriSlice";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { fetchProduct, removeProduct } from "../store/products/productSlice";
 export type IproductItemsProps = {
@@ -47,9 +44,13 @@ export const Home = () => {
         {data.map((e: IproductItemsProps) => {
           return (
             <div key={e._id}>
-             
-               <Cart item={e}></Cart>
-              <button className="bg-red-900 w-full text-white text-xl p-2 rounded-lg rounded-t-none active:opacity-70" onClick={()=>{dispatch(removeProduct(e._id))}}>
+              <Cart item={e}></Cart>
+              <button
+                className="bg-red-900 w-full text-white text-xl p-2 rounded-lg rounded-t-none active:opacity-70"
+                onClick={() => {
+                  dispatch(removeProduct(e._id));
+                }}
+              >
                 remove
               </button>
             </div>
