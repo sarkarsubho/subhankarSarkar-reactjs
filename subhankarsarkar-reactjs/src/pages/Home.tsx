@@ -5,7 +5,7 @@ import { Navbar } from "../components/Navbar";
 
 import { fetchCategory } from "../store/categories/categoriSlice";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { fetchProduct, removeProduct } from "../store/products/productSlice";
+import { fetchProduct, removeProduct, Statues } from "../store/products/productSlice";
 export type IproductItemsProps = {
   avatar: string;
   category: string;
@@ -17,6 +17,7 @@ export type IproductItemsProps = {
 };
 export const Home = () => {
   const Products = useAppSelector((state) => state.app.products);
+  const state = useAppSelector((state) => state.app.status);
   const [searchParams] = useSearchParams();
   const [data, setdata] = useState(Products);
   let categoty = searchParams.get("category");
@@ -37,6 +38,17 @@ export const Home = () => {
     dispatch(fetchCategory());
   }, [dispatch]);
 
+  if(state=== Statues.LOADING){
+    return <div className="text-center text-xl">
+       Loading...
+    </div>
+  }
+
+  if(state=== Statues.ERROR){
+    return <div className="text-center text-xl">
+       Something went Wrong...
+    </div>
+  }
   return (
     <div>
       <Navbar></Navbar>
