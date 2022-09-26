@@ -1,22 +1,34 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Cart } from "../components/Cart";
-import { useAppSelector } from "../store/hooks";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { fetchProductDetails } from "../store/products/productSlice";
 import { IproductItemsProps } from "./Home";
 
 export const Details = () => {
   const Products = useAppSelector((state) => state.app.products);
-
-  const [product, setProduct] = useState<IproductItemsProps>();
+  const detailProduct = useAppSelector((state) => state.app.detailsItem);
+  const dispatch = useAppDispatch();
+  const [product, setProduct] = useState<IproductItemsProps>(detailProduct);
   const { id } = useParams();
-
+ 
+  console.log(product)
+  useEffect(()=>{
+    setProduct(detailProduct)
+  },[detailProduct])
   useEffect(() => {
-    let Product = Products.filter((e) => {
-      return e._id === id;
-    });
+    if (Products.length === 0) {
+      dispatch(fetchProductDetails(`${id}`));
+      console.log("data call from function call");
+    } else {
+      let Product = Products.filter((e) => {
+        return e._id === id;
+      });
 
-    console.log(Product);
-    setProduct(Product[0]);
+      console.log(Product);
+      setProduct(Product[0]);
+      console.log("data call from filter")
+    }
   }, [id, Products]);
 
   return (
